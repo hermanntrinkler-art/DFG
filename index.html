@@ -216,35 +216,53 @@
 
   <!-- Kontakt -->
   <section id="kontakt" style="background:var(--bg-alt);">
-    <div class="wrap split2 reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:72px;">
+    <div class="wrap split2 reveal" style="display:grid;grid-template-columns:0.85fr 1.15fr;gap:72px;align-items:start;">
       <div>
         <div class="eyebrow">Kontakt</div>
         <h2 style="font-size:clamp(28px,3.4vw,42px);margin:16px 0 20px;">Sprechen Sie mit uns</h2>
-        <p style="color:var(--ink-soft);font-size:17px;line-height:1.75;margin:0;">Sie haben Fragen, möchten bestellen oder brauchen ein individuelles Angebot? Unsere erfahrenen Mitarbeiter beraten Sie gerne.</p>
+        <p style="color:var(--ink-soft);font-size:17px;line-height:1.75;margin:0 0 36px;">Sie haben Fragen, möchten bestellen oder brauchen ein individuelles Angebot? Unsere erfahrenen Mitarbeiter beraten Sie gerne – oder schreiben Sie uns direkt über das Formular.</p>
+        <div style="display:flex;flex-direction:column;gap:22px;">
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <svg class="icon" viewBox="0 0 24 24" style="flex-shrink:0;margin-top:2px;"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg>
+            <div style="color:var(--ink-soft);font-size:14.5px;line-height:1.5;">Carl-Zeiss-Str. 41<br>47445 Moers</div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <svg class="icon" viewBox="0 0 24 24" style="flex-shrink:0;margin-top:2px;"><path d="M4 5h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 14l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 4 7a2 2 0 0 1 2-2z"/></svg>
+            <div style="color:var(--ink-soft);font-size:14.5px;line-height:1.5;">Tel. 02841 / 29902<br>Fax 02841 / 18209</div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <svg class="icon" viewBox="0 0 24 24" style="flex-shrink:0;margin-top:2px;"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 21v-3h6v3"/></svg>
+            <div style="color:var(--ink-soft);font-size:14.5px;line-height:1.5;">Mobil 0152 / 33500871<br>WhatsApp 02841 / 29902</div>
+          </div>
+          <a class="btn btn-dark" href="mailto:info@dfg-handel.de" style="width:fit-content;margin-top:6px;">info@dfg-handel.de</a>
+        </div>
       </div>
-      <div style="display:flex;flex-direction:column;gap:20px;">
-        <div class="card" style="padding:26px 30px;display:flex;gap:18px;align-items:flex-start;">
-          <div class="icon-badge" style="margin-bottom:0;flex-shrink:0;"><svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg></div>
-          <div>
-            <div style="font-weight:600;font-size:15px;">Adresse</div>
-            <div style="color:var(--ink-soft);font-size:14.5px;margin-top:4px;line-height:1.5;">Carl-Zeiss-Str. 41<br>47445 Moers</div>
+
+      <div class="card" style="padding:40px;position:relative;">
+        <form id="contact-form" style="display:flex;flex-direction:column;gap:18px;">
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+          <input type="hidden" name="_subject" value="Neue Anfrage über die DFG-Website">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px;">
+            <label style="display:flex;flex-direction:column;gap:7px;font-size:13.5px;font-weight:600;color:var(--ink);">
+              Name *
+              <input required name="name" type="text" placeholder="Ihr Name" style="padding:13px 14px;border:1px solid var(--line);font-size:14.5px;font-family:inherit;background:var(--bg);">
+            </label>
+            <label style="display:flex;flex-direction:column;gap:7px;font-size:13.5px;font-weight:600;color:var(--ink);">
+              E-Mail *
+              <input required name="email" type="email" placeholder="ihre@email.de" style="padding:13px 14px;border:1px solid var(--line);font-size:14.5px;font-family:inherit;background:var(--bg);">
+            </label>
           </div>
-        </div>
-        <div class="card" style="padding:26px 30px;display:flex;gap:18px;align-items:flex-start;">
-          <div class="icon-badge" style="margin-bottom:0;flex-shrink:0;"><svg class="icon" viewBox="0 0 24 24"><path d="M4 5h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 14l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 4 7a2 2 0 0 1 2-2z"/></svg></div>
-          <div>
-            <div style="font-weight:600;font-size:15px;">Telefon &amp; Fax</div>
-            <div style="color:var(--ink-soft);font-size:14.5px;margin-top:4px;line-height:1.5;">Tel. 02841 / 29902<br>Fax 02841 / 18209</div>
-          </div>
-        </div>
-        <div class="card" style="padding:26px 30px;display:flex;gap:18px;align-items:flex-start;">
-          <div class="icon-badge" style="margin-bottom:0;flex-shrink:0;"><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 21v-3h6v3"/></svg></div>
-          <div>
-            <div style="font-weight:600;font-size:15px;">Mobil &amp; WhatsApp</div>
-            <div style="color:var(--ink-soft);font-size:14.5px;margin-top:4px;line-height:1.5;">Mobil 0152 / 33500871<br>WhatsApp 02841 / 29902</div>
-          </div>
-        </div>
-        <a class="btn btn-dark" href="mailto:info@dfg-handel.de" style="width:fit-content;">info@dfg-handel.de</a>
+          <label style="display:flex;flex-direction:column;gap:7px;font-size:13.5px;font-weight:600;color:var(--ink);">
+            Telefon (optional)
+            <input name="phone" type="tel" placeholder="Für Rückfragen" style="padding:13px 14px;border:1px solid var(--line);font-size:14.5px;font-family:inherit;background:var(--bg);">
+          </label>
+          <label style="display:flex;flex-direction:column;gap:7px;font-size:13.5px;font-weight:600;color:var(--ink);">
+            Nachricht *
+            <textarea required name="message" rows="5" placeholder="Wie können wir helfen?" style="padding:13px 14px;border:1px solid var(--line);font-size:14.5px;font-family:inherit;background:var(--bg);resize:vertical;"></textarea>
+          </label>
+          <button type="submit" class="btn btn-primary" id="contact-submit" style="justify-content:center;">Nachricht senden</button>
+          <div id="contact-status" style="font-size:14px;line-height:1.5;display:none;"></div>
+        </form>
       </div>
     </div>
   </section>
@@ -288,6 +306,44 @@
     });
   }, { threshold: 0.15 });
   revealEls.forEach(function(el){ io.observe(el); });
+
+  // Kontaktformular via FormSubmit (kein eigenes Backend nötig)
+  var form = document.getElementById('contact-form');
+  if (form) {
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var btn = document.getElementById('contact-submit');
+      var status = document.getElementById('contact-status');
+      btn.disabled = true;
+      btn.textContent = 'Wird gesendet …';
+      status.style.display = 'none';
+
+      fetch('https://formsubmit.co/ajax/info@dfg-handel.de', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      })
+      .then(function(res){ return res.json().then(function(data){ return { ok: res.ok, data: data }; }); })
+      .then(function(result){
+        if (result.ok) {
+          form.reset();
+          status.style.color = '#1a7a3c';
+          status.textContent = 'Danke! Ihre Nachricht wurde verschickt, wir melden uns zeitnah.';
+        } else {
+          throw new Error('send failed');
+        }
+      })
+      .catch(function(){
+        status.style.color = '#b3261e';
+        status.textContent = 'Das hat leider nicht geklappt. Bitte rufen Sie uns an (02841 / 29902) oder schreiben Sie an info@dfg-handel.de.';
+      })
+      .finally(function(){
+        btn.disabled = false;
+        btn.textContent = 'Nachricht senden';
+        status.style.display = 'block';
+      });
+    });
+  }
 
   // Count-up stat
   var statEl = document.querySelector('.stat');
