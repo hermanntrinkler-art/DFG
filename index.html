@@ -13,36 +13,46 @@
     --ink:#1c1c1a;
     --ink-soft:#4a4744;
     --line:#e2ddd4;
-    --dark:#201f1c;
-    --dark-soft:#302e2a;
+    --dark:#171613;
+    --dark-soft:#221f1a;
     --accent:#e2691a;
+    --accent-deep:#7a3a12;
   }
   *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
   body{margin:0;font-family:"Public Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg);}
-  h1,h2,h3,.brand{font-family:"Space Grotesk",system-ui,sans-serif;letter-spacing:-0.01em;}
+  h1,h2,h3,.brand{font-family:"Space Grotesk",system-ui,sans-serif;letter-spacing:-0.02em;}
   a{color:inherit;text-decoration:none;}
-  a:hover{opacity:0.82;}
   img{max-width:100%;display:block;}
-  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 26px;border-radius:2px;font-weight:600;font-size:15px;cursor:pointer;white-space:nowrap;border:none;}
-  .btn-primary{background:var(--accent);color:#fff;}
-  .btn-primary:hover{background:#c2570f;opacity:1;}
-  .btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.55);}
-  .btn-ghost:hover{border-color:#fff;opacity:1;}
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:2px;font-weight:600;font-size:15px;cursor:pointer;white-space:nowrap;border:none;transition:transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease, opacity .25s ease;}
+  .btn-primary{background:var(--accent);color:#fff;box-shadow:0 8px 24px -8px rgba(226,105,26,0.55);}
+  .btn-primary:hover{background:#c2570f;transform:translateY(-2px);box-shadow:0 12px 28px -8px rgba(226,105,26,0.65);}
+  .btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,0.4);}
+  .btn-ghost:hover{border-color:#fff;transform:translateY(-2px);}
   .btn-dark{background:var(--dark);color:#fff;}
-  .btn-dark:hover{background:var(--dark-soft);opacity:1;}
-  .eyebrow{font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);}
-  .card{background:#fff;border:1px solid var(--line);}
-  .icon{width:26px;height:26px;stroke:var(--accent);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
-  .nav-link{font-size:15px;font-weight:500;color:#e9e6df;}
-  .nav-link:hover{color:#fff;opacity:1;}
+  .btn-dark:hover{background:var(--dark-soft);transform:translateY(-2px);}
+  .eyebrow{display:flex;align-items:center;gap:12px;font-size:12.5px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:var(--accent);}
+  .eyebrow::before{content:"";width:28px;height:1px;background:var(--accent);}
+  .eyebrow.on-dark::before{background:#ff9a4d;}
+  .card{background:#fff;border:1px solid var(--line);transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;}
+  .card:hover{transform:translateY(-4px);box-shadow:0 20px 40px -20px rgba(28,28,26,0.25);border-color:transparent;}
+  .icon-badge{width:52px;height:52px;border-radius:50%;background:linear-gradient(155deg, rgba(226,105,26,0.14), rgba(226,105,26,0.05));display:flex;align-items:center;justify-content:center;margin-bottom:22px;}
+  .icon{width:24px;height:24px;stroke:var(--accent);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;}
+  .nav-link{font-size:14.5px;font-weight:500;color:#cfcbc0;transition:color .2s ease;}
+  .nav-link:hover{color:#fff;}
   .wrap{max-width:1280px;margin:0 auto;}
   .grid3{display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:1px;background:var(--line);border:1px solid var(--line);}
-  section{padding:88px 48px;}
+  section{padding:120px 48px;}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1);}
+  .reveal.in{opacity:1;transform:translateY(0);}
+  .noise{position:absolute;inset:0;opacity:0.05;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  .navbar{position:sticky;top:0;z-index:50;transition:background .35s ease, backdrop-filter .35s ease, box-shadow .35s ease;}
+  .navbar.scrolled{background:rgba(23,22,19,0.92);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(255,255,255,0.06);}
   @media (max-width: 900px){
-    section{padding:56px 20px;}
+    section{padding:72px 20px;}
     .split2{grid-template-columns:1fr !important;}
     .grid3{grid-template-columns:1fr !important;}
-    h1{font-size:32px !important;}
+    h1{font-size:38px !important;}
     .nav-links{display:none !important;}
   }
 </style>
@@ -52,47 +62,67 @@
 <div style="width:100%;background:var(--bg);">
 
   <!-- Utility bar -->
-  <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 48px;background:var(--dark);border-bottom:1px solid rgba(255,255,255,0.08);font-size:13px;color:#c9c5bc;flex-wrap:wrap;gap:8px;">
+  <div style="display:flex;justify-content:space-between;align-items:center;padding:9px 48px;background:var(--dark);border-bottom:1px solid rgba(255,255,255,0.06);font-size:12.5px;color:#a6a196;flex-wrap:wrap;gap:8px;">
     <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;">
       <span>Carl-Zeiss-Str. 41 · 47445 Moers</span>
-      <span style="opacity:0.5;">|</span>
-      <a href="tel:+49284129902" style="color:#c9c5bc;">Tel. 02841&nbsp;29902</a>
-      <span style="opacity:0.5;">|</span>
-      <a href="mailto:info@dfg-handel.de" style="color:#c9c5bc;">info@dfg-handel.de</a>
+      <span style="opacity:0.4;">|</span>
+      <a href="tel:+49284129902" style="color:#a6a196;">Tel. 02841&nbsp;29902</a>
+      <span style="opacity:0.4;">|</span>
+      <a href="mailto:info@dfg-handel.de" style="color:#a6a196;">info@dfg-handel.de</a>
     </div>
-    <div style="display:flex;gap:8px;align-items:center;">
-      <span>WhatsApp 02841&nbsp;29902</span>
-    </div>
+    <div>WhatsApp 02841&nbsp;29902</div>
   </div>
 
   <!-- Nav -->
-  <div style="display:flex;justify-content:space-between;align-items:center;padding:18px 48px;background:var(--dark);">
-    <a href="#top" style="display:flex;align-items:center;gap:12px;">
-      <span style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:var(--accent);color:#fff;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;">DFG</span>
+  <div class="navbar" id="navbar" style="display:flex;justify-content:space-between;align-items:center;padding:20px 48px;background:transparent;">
+    <a href="#top" style="display:flex;align-items:center;gap:13px;">
+      <svg width="42" height="42" viewBox="0 0 42 42" style="flex-shrink:0;">
+        <rect x="0.5" y="0.5" width="41" height="41" fill="var(--accent)"/>
+        <path d="M9 30V12h7.5c5.5 0 9 3.4 9 9s-3.5 9-9 9H9zm4.2-3.6h3.1c3.3 0 5.1-2 5.1-5.4s-1.8-5.4-5.1-5.4h-3.1v10.8z" fill="#fff"/>
+      </svg>
       <span style="display:flex;flex-direction:column;line-height:1.15;">
         <span class="brand" style="color:#fff;font-weight:700;font-size:17px;">DFG Handels GmbH</span>
-        <span style="color:#a9a49a;font-size:12px;letter-spacing:0.04em;">Sandstrahl · Druckluft · Airless seit 1981</span>
+        <span style="color:#93897a;font-size:11.5px;letter-spacing:0.06em;">SANDSTRAHL · DRUCKLUFT · AIRLESS SEIT 1981</span>
       </span>
     </a>
-    <div class="nav-links" style="display:flex;align-items:center;gap:36px;">
+    <div class="nav-links" style="display:flex;align-items:center;gap:38px;">
       <a class="nav-link" href="#leistungen">Leistungen</a>
       <a class="nav-link" href="#ueber-uns">Über uns</a>
       <a class="nav-link" href="#kontakt">Kontakt</a>
-      <a class="btn btn-primary" href="https://www.steflow.shop" target="_blank" rel="noopener">Zum Online-Shop</a>
+      <a class="btn btn-primary" href="https://www.steflow.shop" target="_blank" rel="noopener" style="padding:12px 24px;font-size:14px;">Zum Online-Shop</a>
     </div>
   </div>
 
   <!-- Hero -->
-  <div id="top" style="position:relative;min-height:560px;display:flex;align-items:flex-end;background:var(--dark);overflow:hidden;">
-    <img src="images/hero_van.jpg" alt="DFG Servicefahrzeug" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.55;">
-    <div style="position:absolute;inset:0;background:linear-gradient(0deg, var(--dark) 8%, rgba(32,31,28,0.55) 55%, rgba(32,31,28,0.35) 100%);"></div>
-    <div style="position:relative;padding:80px 48px 64px;max-width:760px;">
-      <div class="eyebrow" style="color:#ff9a4d;">Seit 1981 in Moers</div>
-      <h1 style="color:#fff;font-size:46px;line-height:1.12;margin:14px 0 20px;">Ihr Partner für Sandstrahl-, Druckluft- und Airlesstechnik</h1>
-      <p style="color:#e6e2d9;font-size:17px;line-height:1.6;margin:0 0 32px;max-width:600px;">Über 40 Jahre Erfahrung in der Oberflächentechnik – dazu Arbeitsschutz und Elektroartikel. Persönliche Beratung, kompetenter Service und ein umfangreicher Online-Shop.</p>
-      <div style="display:flex;gap:14px;flex-wrap:wrap;">
-        <a class="btn btn-primary" href="https://www.steflow.shop" target="_blank" rel="noopener">Zum Online-Shop</a>
-        <a class="btn btn-ghost" href="#leistungen">Unsere Leistungen</a>
+  <div id="top" style="position:relative;min-height:100vh;display:flex;align-items:center;background:var(--dark);overflow:hidden;margin-top:-92px;padding-top:92px;">
+    <img src="images/hero_van.jpg" alt="DFG Servicefahrzeug" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.4;filter:saturate(0.85) contrast(1.05);">
+    <div style="position:absolute;inset:0;background:linear-gradient(100deg, var(--dark) 22%, rgba(23,22,19,0.72) 55%, rgba(23,22,19,0.42) 100%);"></div>
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 15% 100%, rgba(226,105,26,0.16), transparent 55%);"></div>
+    <div class="wrap" style="position:relative;padding:0 48px;width:100%;">
+      <div style="max-width:800px;">
+        <div class="eyebrow on-dark" style="color:#ff9a4d;">Seit 1981 in Moers</div>
+        <h1 style="color:#fff;font-size:clamp(40px, 5.6vw, 78px);line-height:1.04;margin:22px 0 26px;">Ihr Partner für Sandstrahl-, Druckluft- und Airlesstechnik</h1>
+        <p style="color:#c9c5bc;font-size:18px;line-height:1.65;margin:0 0 40px;max-width:560px;">Über 40 Jahre Erfahrung in der Oberflächentechnik – dazu Arbeitsschutz und Elektroartikel. Persönliche Beratung, kompetenter Service und ein umfangreicher Online-Shop.</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+          <a class="btn btn-primary" href="https://www.steflow.shop" target="_blank" rel="noopener">Zum Online-Shop</a>
+          <a class="btn btn-ghost" href="#leistungen">Unsere Leistungen</a>
+        </div>
+      </div>
+      <div style="display:flex;gap:56px;margin-top:96px;flex-wrap:wrap;">
+        <div>
+          <div class="stat" data-target="40" style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:38px;color:#fff;">0<span style="color:var(--accent);">+</span></div>
+          <div style="font-size:13px;color:#93897a;margin-top:6px;letter-spacing:0.03em;">Jahre Erfahrung</div>
+        </div>
+        <div style="width:1px;background:rgba(255,255,255,0.12);"></div>
+        <div>
+          <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:38px;color:#fff;">1981</div>
+          <div style="font-size:13px;color:#93897a;margin-top:6px;letter-spacing:0.03em;">Gegründet in Moers</div>
+        </div>
+        <div style="width:1px;background:rgba(255,255,255,0.12);"></div>
+        <div>
+          <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:38px;color:#fff;">DGUV&nbsp;A3</div>
+          <div style="font-size:13px;color:#93897a;margin-top:6px;letter-spacing:0.03em;">Elektroprüfungen</div>
+        </div>
       </div>
     </div>
   </div>
@@ -100,42 +130,42 @@
   <!-- Leistungen -->
   <section id="leistungen">
     <div class="wrap">
-      <div style="max-width:640px;margin:0 0 48px;">
+      <div class="reveal" style="max-width:640px;margin:0 0 64px;">
         <div class="eyebrow">Unser Angebot</div>
-        <h2 style="font-size:32px;margin:12px 0 14px;">Von Sandstrahltechnik bis Elektroartikel</h2>
-        <p style="color:var(--ink-soft);font-size:16px;line-height:1.6;margin:0;">Wir führen ausschließlich Marken, von deren Qualität wir überzeugt sind – und beraten Sie individuell nach Ihrem Bedarf.</p>
+        <h2 style="font-size:clamp(28px,3.4vw,42px);margin:16px 0 16px;">Von Sandstrahltechnik bis Elektroartikel</h2>
+        <p style="color:var(--ink-soft);font-size:17px;line-height:1.65;margin:0;">Wir führen ausschließlich Marken, von deren Qualität wir überzeugt sind – und beraten Sie individuell nach Ihrem Bedarf.</p>
       </div>
 
-      <div class="grid3">
-        <div class="card" style="padding:32px;">
-          <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>
-          <h3 style="font-size:18px;margin:18px 0 8px;">Sandstrahltechnik</h3>
-          <p style="color:var(--ink-soft);font-size:14.5px;line-height:1.6;margin:0;">Sandstrahlkessel, -düsen, -schläuche, Strahlkabinen und Zubehör – auch als Sonderanfertigung.</p>
+      <div class="grid3 reveal">
+        <div class="card" style="padding:40px 34px;">
+          <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v3M12 19v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M2 12h3M19 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg></div>
+          <h3 style="font-size:18.5px;margin:0 0 10px;">Sandstrahltechnik</h3>
+          <p style="color:var(--ink-soft);font-size:14.5px;line-height:1.65;margin:0;">Sandstrahlkessel, -düsen, -schläuche, Strahlkabinen und Zubehör – auch als Sonderanfertigung.</p>
         </div>
-        <div class="card" style="padding:32px;">
-          <svg class="icon" viewBox="0 0 24 24"><path d="M12 21a8 8 0 1 1 8-8"/><path d="M12 13l5-5"/><circle cx="12" cy="13" r="1.3" fill="var(--accent)" stroke="none"/></svg>
-          <h3 style="font-size:18px;margin:18px 0 8px;">Drucklufttechnik</h3>
-          <p style="color:var(--ink-soft);font-size:14.5px;line-height:1.6;margin:0;">Kompressoren, Druckluftanlagen, Armaturen, Kupplungen und technische Schläuche.</p>
+        <div class="card" style="padding:40px 34px;">
+          <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24"><path d="M12 21a8 8 0 1 1 8-8"/><path d="M12 13l5-5"/><circle cx="12" cy="13" r="1.3" fill="var(--accent)" stroke="none"/></svg></div>
+          <h3 style="font-size:18.5px;margin:0 0 10px;">Drucklufttechnik</h3>
+          <p style="color:var(--ink-soft);font-size:14.5px;line-height:1.65;margin:0;">Kompressoren, Druckluftanlagen, Armaturen, Kupplungen und technische Schläuche.</p>
         </div>
-        <div class="card" style="padding:32px;">
-          <svg class="icon" viewBox="0 0 24 24"><path d="M4 15l6-6 3 3 7-7"/><path d="M17 4h3v3"/><path d="M4 19h16"/></svg>
-          <h3 style="font-size:18px;margin:18px 0 8px;">Airless- &amp; Lackiertechnik</h3>
-          <p style="color:var(--ink-soft);font-size:14.5px;line-height:1.6;margin:0;">Airlessgeräte, -pistolen, -schläuche und Filter für effizientes Beschichten.</p>
+        <div class="card" style="padding:40px 34px;">
+          <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24"><path d="M4 15l6-6 3 3 7-7"/><path d="M17 4h3v3"/><path d="M4 19h16"/></svg></div>
+          <h3 style="font-size:18.5px;margin:0 0 10px;">Airless- &amp; Lackiertechnik</h3>
+          <p style="color:var(--ink-soft);font-size:14.5px;line-height:1.65;margin:0;">Airlessgeräte, -pistolen, -schläuche und Filter für effizientes Beschichten.</p>
         </div>
-        <div class="card" style="padding:32px;">
-          <svg class="icon" viewBox="0 0 24 24"><path d="M12 2l7 4v6c0 5-3.2 8.4-7 10-3.8-1.6-7-5-7-10V6l7-4z"/><path d="M9 12l2 2 4-4"/></svg>
-          <h3 style="font-size:18px;margin:18px 0 8px;">Arbeitsschutz</h3>
-          <p style="color:var(--ink-soft);font-size:14.5px;line-height:1.6;margin:0;">Kopf-, Hand- und Atemschutz sowie Schutzkleidung für den täglichen Einsatz.</p>
+        <div class="card" style="padding:40px 34px;">
+          <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24"><path d="M12 2l7 4v6c0 5-3.2 8.4-7 10-3.8-1.6-7-5-7-10V6l7-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <h3 style="font-size:18.5px;margin:0 0 10px;">Arbeitsschutz</h3>
+          <p style="color:var(--ink-soft);font-size:14.5px;line-height:1.65;margin:0;">Kopf-, Hand- und Atemschutz sowie Schutzkleidung für den täglichen Einsatz.</p>
         </div>
-        <div class="card" style="padding:32px;">
-          <svg class="icon" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg>
-          <h3 style="font-size:18px;margin:18px 0 8px;">Elektro &amp; Baustrom</h3>
-          <p style="color:var(--ink-soft);font-size:14.5px;line-height:1.6;margin:0;">Elektroartikel mit Schwerpunkt Baustrom, inkl. Prüfung nach DGUV&nbsp;A3.</p>
+        <div class="card" style="padding:40px 34px;">
+          <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></svg></div>
+          <h3 style="font-size:18.5px;margin:0 0 10px;">Elektro &amp; Baustrom</h3>
+          <p style="color:var(--ink-soft);font-size:14.5px;line-height:1.65;margin:0;">Elektroartikel mit Schwerpunkt Baustrom, inkl. Prüfung nach DGUV&nbsp;A3.</p>
         </div>
-        <div class="card" style="padding:32px;">
-          <svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3l3 3-8.4 8.4-3.9.9.9-3.9 8.4-8.4z"/><path d="M13 8l3 3"/></svg>
-          <h3 style="font-size:18px;margin:18px 0 8px;">Reparatur &amp; Service</h3>
-          <p style="color:var(--ink-soft);font-size:14.5px;line-height:1.6;margin:0;">Wartung, Reparatur und individuelle Lösungen für maximale Ausfallsicherheit.</p>
+        <div class="card" style="padding:40px 34px;">
+          <div class="icon-badge"><svg class="icon" viewBox="0 0 24 24"><path d="M14.7 6.3l3 3-8.4 8.4-3.9.9.9-3.9 8.4-8.4z"/><path d="M13 8l3 3"/></svg></div>
+          <h3 style="font-size:18.5px;margin:0 0 10px;">Reparatur &amp; Service</h3>
+          <p style="color:var(--ink-soft);font-size:14.5px;line-height:1.65;margin:0;">Wartung, Reparatur und individuelle Lösungen für maximale Ausfallsicherheit.</p>
         </div>
       </div>
     </div>
@@ -143,75 +173,72 @@
 
   <!-- Über uns -->
   <section id="ueber-uns" style="background:var(--bg-alt);">
-    <div class="wrap split2" style="display:grid;grid-template-columns:1.05fr 0.95fr;gap:64px;align-items:center;">
+    <div class="wrap split2 reveal" style="display:grid;grid-template-columns:1.05fr 0.95fr;gap:72px;align-items:center;">
       <div>
         <div class="eyebrow">Über uns</div>
-        <h2 style="font-size:32px;margin:12px 0 18px;">Zuverlässiger Partner seit 1981</h2>
-        <p style="color:var(--ink-soft);font-size:16px;line-height:1.7;margin:0 0 28px;">Die DFG Handels GmbH aus Moers steht Kunden aus Korrosionsschutz, Oberflächentechnik und Malerhandwerk seit über 40 Jahren mit Expertise und Leidenschaft zur Seite. Wir reparieren, warten und realisieren nach individuellen Anforderungen – für maximale Ausfallsicherheit und Effizienz.</p>
-        <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:28px;">
-          <div>
-            <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;color:var(--accent);">40+</div>
-            <div style="font-size:14px;color:var(--ink-soft);margin-top:4px;">Jahre Erfahrung</div>
+        <h2 style="font-size:clamp(28px,3.4vw,42px);margin:16px 0 20px;">Zuverlässiger Partner seit 1981</h2>
+        <p style="color:var(--ink-soft);font-size:17px;line-height:1.75;margin:0 0 32px;">Die DFG Handels GmbH aus Moers steht Kunden aus Korrosionsschutz, Oberflächentechnik und Malerhandwerk seit über 40 Jahren mit Expertise und Leidenschaft zur Seite. Wir reparieren, warten und realisieren nach individuellen Anforderungen – für maximale Ausfallsicherheit und Effizienz.</p>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:8px;flex-shrink:0;"></div>
+            <div><strong style="font-size:15px;">Kompetenz</strong><span style="color:var(--ink-soft);font-size:14.5px;"> – über 40 Jahre Erfahrung in der Branche</span></div>
           </div>
-          <div>
-            <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;color:var(--accent);">1981</div>
-            <div style="font-size:14px;color:var(--ink-soft);margin-top:4px;">Gegründet in Moers</div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:8px;flex-shrink:0;"></div>
+            <div><strong style="font-size:15px;">Zuverlässigkeit</strong><span style="color:var(--ink-soft);font-size:14.5px;"> – hochwertige Produkte, zuverlässiger Service</span></div>
           </div>
-          <div>
-            <div style="font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:26px;color:var(--accent);">DGUV&nbsp;A3</div>
-            <div style="font-size:14px;color:var(--ink-soft);margin-top:4px;">Elektroprüfungen</div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:6px;height:6px;border-radius:50%;background:var(--accent);margin-top:8px;flex-shrink:0;"></div>
+            <div><strong style="font-size:15px;">Beratung</strong><span style="color:var(--ink-soft);font-size:14.5px;"> – wir nehmen uns Zeit für Sie</span></div>
           </div>
         </div>
       </div>
-      <div style="display:flex;flex-direction:column;gap:16px;">
-        <img src="images/product_gun.jpg" alt="Airlesspistole aus dem DFG Sortiment" style="width:100%;height:260px;object-fit:cover;border:1px solid var(--line);">
-        <div style="display:grid;grid-template-columns:repeat(3, 1fr);gap:16px;">
-          <div class="card" style="padding:16px;text-align:center;"><div style="font-weight:600;font-size:14px;">Kompetenz</div></div>
-          <div class="card" style="padding:16px;text-align:center;"><div style="font-weight:600;font-size:14px;">Zuverlässigkeit</div></div>
-          <div class="card" style="padding:16px;text-align:center;"><div style="font-weight:600;font-size:14px;">Beratung</div></div>
-        </div>
+      <div style="position:relative;">
+        <div style="position:absolute;top:-24px;left:-24px;width:100%;height:100%;border:1.5px solid var(--accent);z-index:0;"></div>
+        <img src="images/product_gun.jpg" alt="Airlesspistole aus dem DFG Sortiment" style="position:relative;z-index:1;width:100%;height:420px;object-fit:cover;filter:saturate(0.92) contrast(1.05);">
       </div>
     </div>
   </section>
 
   <!-- Shop banner -->
-  <section>
-    <div class="wrap split2" style="display:grid;grid-template-columns:0.95fr 1.05fr;gap:0;background:var(--dark);">
-      <div style="padding:64px 56px;display:flex;flex-direction:column;justify-content:center;">
-        <div class="eyebrow" style="color:#ff9a4d;">Online-Shop</div>
-        <h2 style="color:#fff;font-size:28px;margin:12px 0 16px;">Rund um die Uhr bestellen auf steflow.shop</h2>
-        <p style="color:#c9c5bc;font-size:15.5px;line-height:1.65;margin:0 0 28px;">Ein Großteil unseres Sortiments – von Druckluft- über Sandstrahl- bis Airlesszubehör und Arbeitsschutz – finden Sie jederzeit in unserem Online-Shop.</p>
+  <section style="padding:0;">
+    <div class="wrap split2 reveal" style="display:grid;grid-template-columns:0.95fr 1.05fr;gap:0;background:var(--dark);position:relative;overflow:hidden;">
+      <div class="noise"></div>
+      <div style="position:relative;padding:88px 64px;display:flex;flex-direction:column;justify-content:center;">
+        <div class="eyebrow on-dark" style="color:#ff9a4d;">Online-Shop</div>
+        <h2 style="color:#fff;font-size:clamp(24px,2.6vw,32px);margin:16px 0 18px;">Rund um die Uhr bestellen auf steflow.shop</h2>
+        <p style="color:#c9c5bc;font-size:16px;line-height:1.7;margin:0 0 32px;">Ein Großteil unseres Sortiments – von Druckluft- über Sandstrahl- bis Airlesszubehör und Arbeitsschutz – finden Sie jederzeit in unserem Online-Shop.</p>
         <a class="btn btn-primary" href="https://www.steflow.shop" target="_blank" rel="noopener" style="width:fit-content;">steflow.shop besuchen</a>
       </div>
-      <img src="images/product_nozzles.jpg" alt="Sandstrahl- und Airlesszubehör" style="width:100%;height:100%;min-height:280px;object-fit:cover;">
+      <img src="images/product_nozzles.jpg" alt="Sandstrahl- und Airlesszubehör" style="width:100%;height:100%;min-height:320px;object-fit:cover;filter:saturate(0.9) contrast(1.05);">
     </div>
   </section>
 
   <!-- Kontakt -->
   <section id="kontakt" style="background:var(--bg-alt);">
-    <div class="wrap split2" style="display:grid;grid-template-columns:1fr 1fr;gap:64px;">
+    <div class="wrap split2 reveal" style="display:grid;grid-template-columns:1fr 1fr;gap:72px;">
       <div>
         <div class="eyebrow">Kontakt</div>
-        <h2 style="font-size:32px;margin:12px 0 18px;">Sprechen Sie mit uns</h2>
-        <p style="color:var(--ink-soft);font-size:16px;line-height:1.7;margin:0 0 8px;">Sie haben Fragen, möchten bestellen oder brauchen ein individuelles Angebot? Unsere erfahrenen Mitarbeiter beraten Sie gerne.</p>
+        <h2 style="font-size:clamp(28px,3.4vw,42px);margin:16px 0 20px;">Sprechen Sie mit uns</h2>
+        <p style="color:var(--ink-soft);font-size:17px;line-height:1.75;margin:0;">Sie haben Fragen, möchten bestellen oder brauchen ein individuelles Angebot? Unsere erfahrenen Mitarbeiter beraten Sie gerne.</p>
       </div>
-      <div style="display:flex;flex-direction:column;gap:22px;">
-        <div class="card" style="padding:24px 28px;display:flex;gap:18px;align-items:flex-start;">
-          <svg class="icon" viewBox="0 0 24 24" style="flex-shrink:0;"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg>
+      <div style="display:flex;flex-direction:column;gap:20px;">
+        <div class="card" style="padding:26px 30px;display:flex;gap:18px;align-items:flex-start;">
+          <div class="icon-badge" style="margin-bottom:0;flex-shrink:0;"><svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-6.1-7-11.5A7 7 0 0 1 19 9.5C19 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.4"/></svg></div>
           <div>
             <div style="font-weight:600;font-size:15px;">Adresse</div>
             <div style="color:var(--ink-soft);font-size:14.5px;margin-top:4px;line-height:1.5;">Carl-Zeiss-Str. 41<br>47445 Moers</div>
           </div>
         </div>
-        <div class="card" style="padding:24px 28px;display:flex;gap:18px;align-items:flex-start;">
-          <svg class="icon" viewBox="0 0 24 24" style="flex-shrink:0;"><path d="M4 5h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 14l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 4 7a2 2 0 0 1 2-2z"/></svg>
+        <div class="card" style="padding:26px 30px;display:flex;gap:18px;align-items:flex-start;">
+          <div class="icon-badge" style="margin-bottom:0;flex-shrink:0;"><svg class="icon" viewBox="0 0 24 24"><path d="M4 5h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 14l5 2v4a2 2 0 0 1-2 2A15 15 0 0 1 4 7a2 2 0 0 1 2-2z"/></svg></div>
           <div>
             <div style="font-weight:600;font-size:15px;">Telefon &amp; Fax</div>
             <div style="color:var(--ink-soft);font-size:14.5px;margin-top:4px;line-height:1.5;">Tel. 02841 / 29902<br>Fax 02841 / 18209</div>
           </div>
         </div>
-        <div class="card" style="padding:24px 28px;display:flex;gap:18px;align-items:flex-start;">
-          <svg class="icon" viewBox="0 0 24 24" style="flex-shrink:0;"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 21v-3h6v3"/></svg>
+        <div class="card" style="padding:26px 30px;display:flex;gap:18px;align-items:flex-start;">
+          <div class="icon-badge" style="margin-bottom:0;flex-shrink:0;"><svg class="icon" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 21v-3h6v3"/></svg></div>
           <div>
             <div style="font-weight:600;font-size:15px;">Mobil &amp; WhatsApp</div>
             <div style="color:var(--ink-soft);font-size:14.5px;margin-top:4px;line-height:1.5;">Mobil 0152 / 33500871<br>WhatsApp 02841 / 29902</div>
@@ -222,18 +249,72 @@
     </div>
   </section>
 
+  <!-- CTA strip -->
+  <div class="reveal" style="background:var(--dark);padding:64px 48px;text-align:center;position:relative;overflow:hidden;">
+    <div class="noise"></div>
+    <div style="position:relative;">
+      <h2 style="color:#fff;font-size:clamp(22px,2.6vw,30px);margin:0 0 24px;">Bereit für ein individuelles Angebot?</h2>
+      <a class="btn btn-primary" href="tel:+49284129902">Jetzt anrufen: 02841 / 29902</a>
+    </div>
+  </div>
+
   <!-- Footer -->
-  <div style="background:var(--dark);padding:40px 48px;">
-    <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;border-top:1px solid rgba(255,255,255,0.1);padding-top:28px;">
-      <div style="color:#8b877e;font-size:13px;">© 2026 DFG Handels GmbH · Carl-Zeiss-Str. 41 · 47445 Moers · HRB 11270 Moers</div>
+  <div style="background:var(--dark);padding:32px 48px;">
+    <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;">
+      <div style="color:#75705f;font-size:12.5px;">© 2026 DFG Handels GmbH · Carl-Zeiss-Str. 41 · 47445 Moers · HRB 11270 Moers</div>
       <div style="display:flex;gap:24px;">
-        <a href="#top" style="color:#c9c5bc;font-size:13px;">Nach oben</a>
-        <a href="#" style="color:#c9c5bc;font-size:13px;">Impressum</a>
-        <a href="#" style="color:#c9c5bc;font-size:13px;">Datenschutz</a>
+        <a href="#top" style="color:#a6a196;font-size:12.5px;">Nach oben</a>
+        <a href="#" style="color:#a6a196;font-size:12.5px;">Impressum</a>
+        <a href="#" style="color:#a6a196;font-size:12.5px;">Datenschutz</a>
       </div>
     </div>
   </div>
 
 </div>
+
+<script>
+  // Sticky nav background on scroll
+  var nav = document.getElementById('navbar');
+  window.addEventListener('scroll', function(){
+    if (window.scrollY > 40) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  }, { passive: true });
+
+  // Scroll-reveal
+  var revealEls = document.querySelectorAll('.reveal');
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(function(el){ io.observe(el); });
+
+  // Count-up stat
+  var statEl = document.querySelector('.stat');
+  if (statEl) {
+    var counted = false;
+    var statIo = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting && !counted) {
+          counted = true;
+          var target = parseInt(statEl.getAttribute('data-target'), 10);
+          var start = 0;
+          var dur = 1200;
+          var startTime = performance.now();
+          function tick(now){
+            var p = Math.min(1, (now - startTime) / dur);
+            var val = Math.floor(p * target);
+            statEl.childNodes[0].nodeValue = val;
+            if (p < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+          statIo.unobserve(statEl);
+        }
+      });
+    }, { threshold: 0.5 });
+    statIo.observe(statEl);
+  }
+</script>
+
 </body>
 </html>
