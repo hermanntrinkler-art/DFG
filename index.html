@@ -43,6 +43,10 @@
   .nav-link:hover{color:#fff;}
   .wrap{max-width:1280px;margin:0 auto;}
   .grid3{display:grid;grid-template-columns:repeat(3, minmax(0, 1fr));gap:1px;background:var(--line);border:1px solid var(--line);}
+  .gallery-grid{display:grid;grid-template-columns:repeat(4, minmax(0, 1fr));gap:1px;background:var(--line);border:1px solid var(--line);}
+  .gallery-item{overflow:hidden;background:var(--dark);}
+  .gallery-item img{width:100%;height:290px;object-fit:cover;transition:transform .5s ease;}
+  .gallery-item:hover img{transform:scale(1.06);}
   section{padding:120px 48px;}
   .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1);}
   .reveal.in{opacity:1;transform:translateY(0);}
@@ -63,6 +67,8 @@
     .spec-grid{grid-template-columns:1fr !important;}
     .price-table-wrap{display:none !important;}
     .price-list-mobile{display:block !important;}
+    .gallery-grid{grid-template-columns:repeat(2, minmax(0,1fr)) !important;}
+    .gallery-item img{height:180px !important;}
   }
   @media (max-width: 480px){
     .px48{padding-left:16px !important;padding-right:16px !important;}
@@ -103,6 +109,7 @@
       <a class="nav-link" href="#leistungen">Leistungen</a>
       <a class="nav-link" href="#ueber-uns">Über uns</a>
       <a class="nav-link" href="#vermietung">Vermietung</a>
+      <a class="nav-link" href="#galerie">Galerie</a>
       <a class="nav-link" href="#kontakt">Kontakt</a>
       <a class="btn btn-primary" href="https://www.steflow.shop" target="_blank" rel="noopener" style="padding:12px 24px;font-size:14px;">Zum Online-Shop</a>
     </div>
@@ -314,9 +321,27 @@
           </div>
         </div>
       </div>
-      <div style="margin-top:32px;">
+      <div style="margin-top:32px;display:flex;gap:16px;flex-wrap:wrap;">
         <a class="btn btn-primary" href="mailto:info@dfg-handel.de?subject=Anfrage%20VacTrailer%20S-4">VacTrailer jetzt anfragen</a>
+        <a class="btn btn-ghost" href="docs/DFG-VacTrailer-S4-Flyer.pdf" target="_blank" rel="noopener" style="color:var(--ink);border-color:var(--line);">
+          <svg class="icon" viewBox="0 0 24 24" style="width:18px;height:18px;stroke:var(--ink);"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+          Flyer als PDF herunterladen
+        </a>
       </div>
+    </div>
+  </section>
+
+  <!-- Galerie -->
+  <section id="galerie">
+    <div class="wrap reveal">
+      <div class="eyebrow">Impressionen</div>
+      <h2 style="font-size:clamp(28px,3.4vw,42px);margin:16px 0 40px;">Unsere Ausrüstung im Einsatz</h2>
+    </div>
+    <div class="wrap gallery-grid reveal">
+      <div class="gallery-item"><img src="images/gallery_van.jpg" alt="DFG Servicefahrzeug mit Airless-Spritzgerät" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery_sprayer.jpg" alt="Airless-Spritzgerät vor dem DFG Fahrzeug" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery_vactrailer_side.jpg" alt="VacTrailer S-4 Sauglader, Seitenansicht" loading="lazy"></div>
+      <div class="gallery-item"><img src="images/gallery_vactrailer_tank.jpg" alt="VacTrailer S-4, Detailansicht Behälter" loading="lazy"></div>
     </div>
   </section>
 
